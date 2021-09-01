@@ -1,0 +1,25 @@
+{
+    "name": "hyqo/command-line",
+    "description": "",
+    "keywords": [
+        "cli"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleg Sedinkin",
+            "email": "a@aw.wtf"
+        }
+    ],
+    "require": {
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hyqo\\CLI\\": "src"
+        }
+    }
+}
