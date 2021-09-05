@@ -23,13 +23,13 @@ class ArgumentsTest extends TestCase
 
     public function testGetFirstArgument()
     {
-        $this->assertEquals('arg1', $this->arguments->getFirstArgument());
+        $this->assertEquals('arg1', $this->arguments->getFirst());
     }
 
     public function testGetArgument()
     {
-        $this->assertEquals('arg1', $this->arguments->getArgument(1));
-        $this->assertEquals('arg2', $this->arguments->getArgument(2));
+        $this->assertEquals('arg1', $this->arguments->get(1));
+        $this->assertEquals('arg2', $this->arguments->get(2));
     }
 
     public function testGetShortOptions()

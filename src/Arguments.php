@@ -13,12 +13,12 @@ class Arguments
         $this->argv ??= $_SERVER['argv'];
     }
 
-    public function getFirstArgument(): ?string
+    public function getFirst(): ?string
     {
-        return $this->getArgument(1);
+        return $this->get(1);
     }
 
-    public function getArgument(int $index): ?string
+    public function get(int $index): ?string
     {
         return $this->argv[$index] ?? null;
     }
