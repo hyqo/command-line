@@ -24,8 +24,8 @@ class FormatterTest extends TestCase
 
     public function testFormatWithoutAnsi()
     {
-        $message = ['<error>foo</error>', '<trace>bar</trace>'];
-        $expected = 'foo' . PHP_EOL . 'bar' . PHP_EOL;
+        $message = ["<error>line 1\nline 2</error>", '<trace>bar</trace>'];
+        $expected = 'line 1' . PHP_EOL . 'line 2' . PHP_EOL . 'bar' . PHP_EOL;
 
         $this->assertEquals($expected, (new Formatter())->format($message));
     }
