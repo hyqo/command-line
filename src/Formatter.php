@@ -19,7 +19,7 @@ class Formatter
 
         foreach (self::STYLES as $tag => $style) {
             $message = preg_replace(
-                sprintf('/<%1$s>(.*)<\/%1$s>/s', $tag),
+                sprintf('/<%1$s>(.*)<\/%1$s>/sU', $tag),
                 $this->colorize ? sprintf("\033[%s$1\033[0m", $style) : '$1',
                 $message
             );
