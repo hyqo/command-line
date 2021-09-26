@@ -18,6 +18,11 @@ class Arguments
         return $this->get(1);
     }
 
+    public function getAll(): array
+    {
+        return $this->argv;
+    }
+
     public function get(int $index): ?string
     {
         return $this->argv[$index] ?? null;

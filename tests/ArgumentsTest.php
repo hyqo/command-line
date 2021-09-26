@@ -6,19 +6,26 @@ use PHPUnit\Framework\TestCase;
 
 class ArgumentsTest extends TestCase
 {
+    private array $input = [
+        'arg0',
+        'arg1',
+        'arg2',
+        '-fa',
+        '--l1=foo',
+        '--l2=false',
+        '--l3',
+    ];
+
     private Arguments $arguments;
 
     protected function setUp(): void
     {
-        $this->arguments = new Arguments([
-            'arg0',
-            'arg1',
-            'arg2',
-            '-fa',
-            '--l1=foo',
-            '--l2=false',
-            '--l3',
-        ]);
+        $this->arguments = new Arguments($this->input);
+    }
+
+    public function testGetAllArgument()
+    {
+        $this->assertEquals($this->input, $this->arguments->getAll());
     }
 
     public function testGetFirstArgument()
