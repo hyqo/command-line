@@ -1,16 +1,25 @@
 <?php
 
-namespace Hyqo\CLI;
+namespace Hyqo\Cli;
 
 class Arguments
 {
-    private ?array $shortOptions = null;
-    private ?array $longOptions = null;
+    /** @var null|array */
+    protected $argv;
 
-    public function __construct(
-        private ?array $argv = null
-    ) {
-        $this->argv ??= $_SERVER['argv'];
+    /** @var null|array */
+    protected $shortOptions = null;
+
+    /** @var null|array */
+    protected $longOptions = null;
+
+    public function __construct(?array $argv = null)
+    {
+        if (null === $argv) {
+            $this->argv = $_SERVER['argv'];
+        } else {
+            $this->argv = $argv;
+        }
     }
 
     public function getFirst(): ?string
@@ -47,8 +56,10 @@ class Arguments
 
     public function getLongOptions(): array
     {
-        return $this->longOptions ??= iterator_to_array(
-            (function () {
+        if (null === $this->longOptions) {
+            $this->longOptions = (function () {
+                $arguments = [];
+
                 foreach ($this->argv as $argument) {
                     if (!preg_match('/^--(?P<key>\w+)(?: *= *(?P<value>.+))?/', $argument, $matches)) {
                         continue;
@@ -57,14 +68,17 @@ class Arguments
                     $key = $matches['key'];
                     $value = $matches['value'] ?? true;
 
-                    $value = match ($value) {
-                        'false', 'FALSE' => false,
-                        default => $value
-                    };
+                    if (is_string($value) && strtolower($value) === 'false') {
+                        $value = false;
+                    }
 
-                    yield $key => $value;
+                    $arguments[$key] = $value;
                 }
-            })()
-        );
+
+                return $arguments;
+            })();
+        }
+
+        return $this->longOptions;
     }
 }

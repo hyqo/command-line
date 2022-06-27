@@ -1,26 +1,46 @@
 <?php
 
-namespace Hyqo\CLI;
+namespace Hyqo\Cli;
 
 /** @codeCoverageIgnore */
 class Output
 {
-    private Formatter $formatter;
+    /** @var \SplDoublyLinkedList */
+    public static $cache = [];
 
-    public static array $cache = [];
+    /** @var Formatter */
+    protected $formatter;
 
-    public function __construct(private $stream)
+    protected $stream;
+
+    public function __construct($stream)
     {
+        $this->stream = $stream;
         $this->formatter = new Formatter(stream_isatty($this->stream));
     }
 
-    public function write(array|string $message): void
+    /**
+     * @param array|string $message
+     */
+    public function write($message): void
     {
         fwrite($this->stream, $this->formatter->format($message));
     }
 
-    public static function send(array|string $message, $stream): void
+    /**
+     * @param array|string $message
+     */
+    public static function send($message, $stream): void
     {
-        (self::$cache[get_resource_id($stream)] ??= new self($stream))->write($message);
+//        $id = get_resource_id($stream);
+
+//        if (array_key_exists($id, self::$cache)) {
+//            $output = self::$cache[$id];
+//        } else {
+//            $output = self::$cache[$id] = new self($stream);
+//        }
+        $output = new self($stream);
+
+        $output->write($message);
     }
 }

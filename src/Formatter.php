@@ -1,19 +1,25 @@
 <?php
 
-namespace Hyqo\CLI;
+namespace Hyqo\Cli;
 
 class Formatter
 {
-    private const STYLES = [
+    protected $colorize = false;
+
+    protected const STYLES = [
         'error' => '31m',
         'trace' => '90m',
     ];
 
-    public function __construct(private bool $colorize = false)
+    public function __construct(bool $colorize = false)
     {
+        $this->colorize = $colorize;
     }
 
-    public function format(array|string $message, bool $ansi = false): string
+    /**
+     * @param array|string $message
+     */
+    public function format($message, bool $ansi = false): string
     {
         $message = $this->normalize($message);
 
@@ -28,10 +34,15 @@ class Formatter
         return $message;
     }
 
-    public function normalize(array|string $message): string
+    /**
+     * @param array|string $message
+     */
+    public function normalize($message): string
     {
         if (is_array($message)) {
-            return array_reduce($message, static fn(string $carry, string $line) => $carry . $line . PHP_EOL, '');
+            return array_reduce($message, static function (string $carry, string $line) {
+                return $carry . $line . PHP_EOL;
+            }, '');
         }
 
         return $message . PHP_EOL;

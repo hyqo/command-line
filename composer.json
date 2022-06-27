@@ -12,14 +12,14 @@
         }
     ],
     "require": {
-        "php": "^8.0"
+        "php": ">=7.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {
-            "Hyqo\\CLI\\": "src"
+            "Hyqo\\Cli\\": "src"
         }
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
-
-use Hyqo\CLI\Output;
+use Hyqo\Cli\Output;
 use PHPUnit\Framework\TestCase;
 
 class OutputTest extends TestCase

@@ -1,12 +1,12 @@
 <?php
 
-
-use Hyqo\CLI\Arguments;
+use Hyqo\Cli\Arguments;
 use PHPUnit\Framework\TestCase;
 
 class ArgumentsTest extends TestCase
 {
-    private array $input = [
+    /** @var string[] */
+    private $input = [
         'arg0',
         'arg1',
         'arg2',
@@ -16,7 +16,8 @@ class ArgumentsTest extends TestCase
         '--l3',
     ];
 
-    private Arguments $arguments;
+    /** @var Arguments */
+    private $arguments;
 
     protected function setUp(): void
     {

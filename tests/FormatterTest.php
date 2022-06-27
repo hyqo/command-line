@@ -1,7 +1,7 @@
 <?php
 
-use Hyqo\CLI\Formatter;
-use Hyqo\CLI\Output;
+use Hyqo\Cli\Formatter;
+use Hyqo\Cli\Output;
 use PHPUnit\Framework\TestCase;
 
 class FormatterTest extends TestCase
