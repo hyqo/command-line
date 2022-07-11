@@ -4,15 +4,18 @@ namespace Hyqo\Cli;
 
 class Arguments
 {
-    /** @var null|array */
+    /** @var array<string> */
     protected $argv;
 
-    /** @var null|array */
+    /** @var array<true>|null */
     protected $shortOptions = null;
 
-    /** @var null|array */
+    /** @var array<string>|null */
     protected $longOptions = null;
 
+    /**
+     * @param array<string>|null $argv
+     */
     public function __construct(?array $argv = null)
     {
         if (null === $argv) {
@@ -27,6 +30,9 @@ class Arguments
         return $this->get(1);
     }
 
+    /**
+     * @return string[]
+     */
     public function getAll(): array
     {
         return $this->argv;
@@ -37,6 +43,9 @@ class Arguments
         return $this->argv[$index] ?? null;
     }
 
+    /**
+     * @return array<true>
+     */
     public function getShortOptions(): array
     {
         return $this->shortOptions = iterator_to_array(
@@ -54,6 +63,9 @@ class Arguments
         );
     }
 
+    /**
+     * @return array<bool|string>
+     */
     public function getLongOptions(): array
     {
         if (null === $this->longOptions) {

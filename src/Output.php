@@ -5,14 +5,18 @@ namespace Hyqo\Cli;
 /** @codeCoverageIgnore */
 class Output
 {
-    /** @var \SplDoublyLinkedList */
-    public static $cache = [];
+//    /** @var \SplDoublyLinkedList */
+//    public static $cache = [];
 
     /** @var Formatter */
     protected $formatter;
 
+    /** @var resource */
     protected $stream;
 
+    /**
+     * @param resource $stream
+     */
     public function __construct($stream)
     {
         $this->stream = $stream;
@@ -20,7 +24,7 @@ class Output
     }
 
     /**
-     * @param array|string $message
+     * @param array<string>|string $message
      */
     public function write($message): void
     {
@@ -28,7 +32,8 @@ class Output
     }
 
     /**
-     * @param array|string $message
+     * @param array<string>|string $message
+     * @param resource $stream
      */
     public static function send($message, $stream): void
     {

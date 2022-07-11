@@ -24,28 +24,28 @@ class ArgumentsTest extends TestCase
         $this->arguments = new Arguments($this->input);
     }
 
-    public function testGetAllArgument()
+    public function testGetAllArgument(): void
     {
         $this->assertEquals($this->input, $this->arguments->getAll());
     }
 
-    public function testGetFirstArgument()
+    public function testGetFirstArgument(): void
     {
         $this->assertEquals('arg1', $this->arguments->getFirst());
     }
 
-    public function testGetArgument()
+    public function testGetArgument(): void
     {
         $this->assertEquals('arg1', $this->arguments->get(1));
         $this->assertEquals('arg2', $this->arguments->get(2));
     }
 
-    public function testGetShortOptions()
+    public function testGetShortOptions(): void
     {
         $this->assertEquals(['f' => true, 'a' => true], $this->arguments->getShortOptions());
     }
 
-    public function testGetLongOptions()
+    public function testGetLongOptions(): void
     {
         $this->assertEquals(
             ['l1' => 'foo', 'l2' => false, 'l3' => true],

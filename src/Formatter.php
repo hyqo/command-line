@@ -4,6 +4,7 @@ namespace Hyqo\Cli;
 
 class Formatter
 {
+    /** @var bool */
     protected $colorize = false;
 
     protected const STYLES = [
@@ -17,14 +18,14 @@ class Formatter
     }
 
     /**
-     * @param array|string $message
+     * @param array<string>|string $message
      */
     public function format($message, bool $ansi = false): string
     {
         $message = $this->normalize($message);
 
         foreach (self::STYLES as $tag => $style) {
-            $message = preg_replace(
+            $message = (string)preg_replace(
                 sprintf('/<%1$s>(.*)<\/%1$s>/sU', $tag),
                 $this->colorize ? sprintf("\033[%s$1\033[0m", $style) : '$1',
                 $message
@@ -35,7 +36,7 @@ class Formatter
     }
 
     /**
-     * @param array|string $message
+     * @param array<string>|string $message
      */
     public function normalize($message): string
     {
